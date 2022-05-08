@@ -1,6 +1,7 @@
 #ifndef binary_search_tree_h
 #define binary_search_tree_h
 
+#include <stdio.h>
 #include <stdlib.h>
 
 #include "utils.h"
@@ -25,11 +26,14 @@ int bst_height(bst_node* root);
 void bst_traversal_postorder(bst_node* root, int* data_arr, int* data_idx, int* bal_arr, int* bal_idx);
 void bst_traversal_inorder(bst_node* root, int* data_arr, int* data_idx, int* bal_arr, int* bal_idx);
 void bst_traversal_preorder(bst_node* root, int* data_arr, int* data_idx, int* bal_arr, int* bal_idx);
+
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
+//AVL Trees // // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
-// WARNING: "bst_balance_factor" is not compatible with "dy_array" of
-// type anything other than "pairs" aka "struct pairs".
 void bst_balance_factor(bst_node* root);
+bst_node* bst_to_avl(bst_node* root);
+bst_node* bst_avl_rotate_left(bst_node* root);
+bst_node* bst_avl_rotate_right(bst_node* root);
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -42,6 +46,7 @@ bst_node* bst_create_node(int node_val)
     node->data = node_val;
     node->left = NULL;
     node->right = NULL;
+    node->balance = 0;
     return node;
 }
 
@@ -176,14 +181,60 @@ void bst_balance_factor(bst_node* root)
 // AVL Trees// // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-void bst_avl_rotate_left(bst_node* root)
+bst_node* bst_avl_rotate_left(bst_node* root)
 {
-    
+    bst_node* new_root = root->right;
+    bst_node* carry = new_root->left;
+
+    new_root->left = root;
+    root->right = carry;
+
+    bst_balance_factor(new_root);
+    return new_root;
 }
 
-bst_node* bst_to_avl(bst_node* root)
+bst_node* bst_avl_rotate_right(bst_node* root)
 {
-    return NULL;
+    bst_node* new_root = root->left;
+    bst_node* carry = new_root->right;
+
+    new_root->right = root;
+    root->left = carry;
+
+    bst_balance_factor(new_root);
+    return new_root;
+}
+
+bst_node* bst_avl_insert(bst_node* root, int node_val)
+{
+    if(root == NULL)
+        return bst_create_node(node_val);
+    else if(node_val < root->data)
+        root->left = bst_avl_insert(root->left, node_val);
+    else if(node_val > root->data)
+        root->right = bst_avl_insert(root->right, node_val);
+    else
+        return root;
+
+    bst_balance_factor(root);
+
+    if(root->balance > 1 && node_val < root->left->data)
+        return bst_avl_rotate_right(root);
+    if(root->balance < -1 && node_val > root->right->data)
+        return bst_avl_rotate_left(root);
+
+    if(root->balance > 1 && node_val > root->left->data)
+    {
+        root->left = bst_avl_rotate_left(root->left);
+        return bst_avl_rotate_right(root);
+    }
+    if(root->balance < -1 && node_val < root->right->data)
+    {
+        root->right = bst_avl_rotate_right(root->right);
+        return bst_avl_rotate_left(root);
+    }
+
+    return root;
 }
 
 

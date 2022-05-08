@@ -15,6 +15,7 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 list_graph* a_graph(void);
+bst_node* avl_bst(void);
 list_graph* random_graph(int size);
 bst_node* a_bst(void);
 int* random_array(int size)
@@ -45,7 +46,7 @@ int* descending_array(int size)
 
 int main()
 {
-    bst_node* graph = a_bst();
+    bst_node* graph = avl_bst();
     bst_balance_factor(graph);
     
     int gr_count = bst_count_nodes(graph);
@@ -58,7 +59,7 @@ int main()
     *b_idx = -1;
     
     bst_traversal_preorder(graph, dat, d_idx, bal, b_idx);
-    
+    printf("%d\n", gr_count);
     for(int i = 0; i < gr_count; i++)
         printf("%d : %d\n", dat[i], bal[i]);
     
@@ -106,6 +107,27 @@ bst_node* a_bst()
     bst_add_node(root, 14);// this
     bst_add_node(root, 16);
     bst_add_node(root, 19);
+    
+    return root;
+}
+
+bst_node* avl_bst()
+{
+    bst_node* root = bst_create_node(30);
+    root = bst_avl_insert(root, 10);
+    root = bst_avl_insert(root, 5);
+    root = bst_avl_insert(root, 2);
+    root = bst_avl_insert(root, 7);
+    root = bst_avl_insert(root, 6);
+    root = bst_avl_insert(root, 8);// this
+    
+    root = bst_avl_insert(root, 11);
+    root = bst_avl_insert(root, 13);
+    root = bst_avl_insert(root, 17);
+    root = bst_avl_insert(root, 15);
+    root = bst_avl_insert(root, 14);// this
+    root = bst_avl_insert(root, 16);
+    root = bst_avl_insert(root, 19);
     
     return root;
 }
