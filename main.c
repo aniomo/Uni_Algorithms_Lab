@@ -1,16 +1,16 @@
 #include <stdio.h>
 
 #include "utils.h"
-#include "sorting.h"
+#include "str_match.h"
 
 int main()
 {
-    int size = 10;
-    int array[] = {9, 2, 21, 60, 11, 8, 7, 67, 17, 89};
+    string* pattern = str_create("alaska");
+    string* text = str_create("tabalaska");
 
-    int* sorted = heap_sort(&(array[0]), size);
+    int found = str_horsepool(text, pattern);
 
-    print_array(sorted, size);
+    printf("%d\n", found);
 
     return 0;
 }
