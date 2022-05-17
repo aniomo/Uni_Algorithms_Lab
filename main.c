@@ -1,19 +1,16 @@
 #include <stdio.h>
 
 #include "utils.h"
-#include "heap.h"
+#include "sorting.h"
 
 int main()
 {
-    heap* nums = heap_create(7);
-    heap_insert(nums, 1);
-    heap_insert(nums, 6);
-    heap_insert(nums, 3);
-    heap_insert(nums, 4);
-    heap_insert(nums, 5);
-    heap_insert(nums, 9);
-    heap_insert(nums, 7);
-    heap_display(nums);
-    
+    int size = 10;
+    int array[] = {9, 2, 21, 60, 11, 8, 7, 67, 17, 89};
+
+    int* sorted = heap_sort(&(array[0]), size);
+
+    print_array(sorted, size);
+
     return 0;
 }

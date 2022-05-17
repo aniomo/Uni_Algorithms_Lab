@@ -1,6 +1,7 @@
 #ifndef utils_h
 #define utils_h
 
+#include <stdio.h>
 #include <stdlib.h>
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
@@ -20,6 +21,8 @@ void swap(int* a, int* b);
 void reverse_array(int* array, int size);
 int* sub_array(int* array, int start, int end);
 int max(int a, int b);
+int* copy_array(int* from, int fsize, int* to, int tsize);
+void print_array(int* array, int size);
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
@@ -52,6 +55,22 @@ int max(int a, int b)
         return a;
     else
         return b;
+}
+
+int* copy_array(int* from, int fsize, int* to, int tsize)
+{
+    if(to == NULL)
+        to = (int*)malloc(sizeof(int) * fsize);
+    for(int i = 0; i < fsize; i++)
+        to[i] = from[i];
+    return to;
+}
+
+void print_array(int* array, int size)
+{
+    for(int i = 0; i < size; i++)
+        printf("%d ", array[i]);
+    printf("\n");
 }
 
 #endif //utils_h

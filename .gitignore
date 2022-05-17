@@ -6,3 +6,6 @@
 *.png
 *.xcodeproj
 *.sln
+*.ppm
+*.sh
+test_*.c

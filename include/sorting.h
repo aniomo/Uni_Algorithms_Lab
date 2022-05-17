@@ -2,6 +2,16 @@
 #define sorting_h
 
 #include "utils.h"
+#include "heap.h"
+
+// // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// FUNCTIONS// // // // // // // // // // // // // // // // // // // // // // // //
+// // // // // // // // // // // // // // // // // // // // // // // // // // // //
+void quick_sort(int* array, int p, int r, int* count);
+void merge_sort(int* array, int p, int r, int* count);
+// // // // // // // // // // // // // // // // // // // // // // // // // // // //
+// // // // // // // // // // // // // // // // // // // // // // // // // // // //
+
 
 
 
@@ -63,5 +73,20 @@ void quick_sort(int* array, int p, int r, int* count)
         quick_sort(array, q+1, r, count);
     }
 }
+
+int* heap_sort(int* array, int size)
+{
+    heap* hp = heap_build_max_heap(array, size);
+    for(int i = hp->arr_size; i > 1; i--)
+    {
+        swap(hp->heap_arr + (1 - 1), hp->heap_arr + (i - 1));
+        hp->heap_size--;
+        max_heapify(hp, 1);
+    }
+    int* sorted = hp->heap_arr;
+    free(hp);
+    return sorted;
+}
+
 
 #endif //sorting_h
