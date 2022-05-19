@@ -1,16 +1,18 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 #include "utils.h"
-#include "str_match.h"
+#include "heap.h"
+
 
 int main()
 {
-    string* pattern = str_create("alaska");
-    string* text = str_create("tabalaska");
+    int arr[] = {4, 5, 2, 9};
 
-    int found = str_horsepool(text, pattern);
+    heap* hp = heap_build_max_heap(&(arr[0]), 4);
 
-    printf("%d\n", found);
+    print_array(hp->heap_arr, 4);
 
     return 0;
 }

@@ -9,6 +9,7 @@
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 void quick_sort(int* array, int p, int r, int* count);
 void merge_sort(int* array, int p, int r, int* count);
+int* heap_sort(int* array, int size);
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 

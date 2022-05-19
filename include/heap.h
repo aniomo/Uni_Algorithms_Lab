@@ -9,6 +9,11 @@
 #define HEAP_TYPE int
 #define HEAP_NULL 0
 
+// Utility Macros
+#define heap_parent(i) (i/2)
+#define heap_left(i) (2*i)
+#define heap_right(i) (2*i + 1)
+
 // For the heap the index starts at 1, 
 // so as a rule of thumb always subtract the index by 1 whenever you
 // dereference the array at that index. ie( heap[i - 1] to get value at index i)
@@ -26,17 +31,6 @@ heap* heap_build_max_heap(int* elements, int size);
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
-
-
-
-// // // // // // // // // // // // // // // // // // // // // // // // // // // //
-// Utility Functions // // // // // // // // // // // // // // // // // // // // //
-// // // // // // // // // // // // // // // // // // // // // // // // // // // //
-int heap_parent(int i) { return (i/2); }
-int heap_left(int i) { return (2*i); }
-int heap_right(int i) { return (2*i + 1); }
-// // // // // // // // // // // // // // // // // // // // // // // // // // // //
-// // // // // // // // // // // // // // // // // // // // // // // // // // // //
 
 
 // // // // // // // // // // // // // // // // // // // // // // // // // // // //

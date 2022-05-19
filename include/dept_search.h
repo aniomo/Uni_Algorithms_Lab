@@ -119,5 +119,4 @@ stack* src_topo_sort(mat_graph* graph, int s_index)
     return topo_sort;
 }
 
-
 #endif //dept_search_h
