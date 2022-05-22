@@ -1,18 +1,29 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <time.h>
 
 #include "utils.h"
-#include "heap.h"
+#include "hash.h"
 
+int hash_func(int element, int size)
+{
+    return element % size;
+}
+
+int collision(int hashindex, int size , int attempts)
+{
+    return (hashindex+1) % size;
+}
 
 int main()
 {
-    int arr[] = {4, 5, 2, 9};
+    int arr[] = {4, 5, 2, 9, 1};
 
-    heap* hp = heap_build_max_heap(&(arr[0]), 4);
+    Hashtable* hash = create_open_hash(&arr[0], 5, hash_func, collision);    
 
-    print_array(hp->heap_arr, 4);
+    print_array(hash->table, hash->capacity);
+
+    int element = 4;
+    printf("%d is found at index %d\n", element, search_open_hash(hash, element));
 
     return 0;
 }

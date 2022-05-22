@@ -49,4 +49,6 @@ int str_horsepool(string* text, string* pattern)
     return -1;
 }
 
+
+
 #endif // str_match_h
